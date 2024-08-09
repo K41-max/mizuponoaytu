@@ -1,19 +1,31 @@
 <!DOCTYPE html>
-<>
+<html lang="ja">
 <head>
     <meta charset='utf-8'>
-    <title>英単語レベル</title>
-    <script>function getlevel(){
-        if(document.getElementById('word').value == "yuki"){document.cookie = "yuki=True; path=/;";}else{
-        let req = new XMLHttpRequest();
-        req.addEventListener("load", function(){document.getElementById('info').textContent = this.responseText});
-        req.open("GET", "/answer?q="+document.getElementById('word').value);
-        req.send();}
-    }</script>
+    <title>試験的な改造サイト[公式]</title>
+    <script>
+        function getlevel() {
+            if (document.getElementById('word').value == "tc1700") {
+                document.cookie = "yuki=True; path=/;";
+            } else {
+                let req = new XMLHttpRequest();
+                req.addEventListener("load", function() {
+                    if (this.responseText === "") {
+                        document.getElementById('info').textContent = "認証エラーが発生しました。もう一度試してください。";
+                    } else {
+                        document.getElementById('info').textContent = this.responseText;
+                    }
+                });
+                req.open("GET", "/answer?q=" + document.getElementById('word').value);
+                req.send();
+            }
+        }
+    </script>
 </head>
-    英単語のレベルを出します。<br>
-    その単語が文脈から判断するべき単語か、覚えておくべき単語かの参考にしてください。<br>
-    <input id="word" type="text"></input><input type="button" onClick="getlevel()">確認</input>
-    <div id="info">
+<body>
+    これは試験的な改造サイトです。<br>次に進むにはパスワードを入力してください。<br>
+    <input id="word" type="text">
+    <button onClick="getlevel()">認証</button>
+    <div id="info"></div><br>時間があれば他の機能も追加する予定です。&emsp;綾瀬。
 </body>
 </html>
