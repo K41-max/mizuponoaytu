@@ -2,7 +2,7 @@
 <html lang="ja">
 
 <head>
-    <title>ホーム</title>
+    <title>連番を簡単に生成！！</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="stylesheet" href="/css/empty.css">
     <link rel="stylesheet" href="/css/pure-min.css">
@@ -13,18 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style>
-        body {
-            background-image: url('https://github.com/mizupoppo/yukiyoutube-ays01/blob/main/images/hafnptch.png?raw=true'); /* 画像URLを指定 */
-            background-size: cover; /* 画像を画面全体に拡大 */
-            background-position: center; /* 画像の中心を表示 */
-            background-repeat: no-repeat; /* 画像を繰り返さない */
-            margin: 0; /* ページ全体の余白をなくす */
-        }
-
         #digital-clock-container {
             position: absolute;
             top: 10px;
-            left: 10px;
+            right: 10px;
             padding: 10px;
             background-color: #333;
             color: #fff;
@@ -42,6 +34,18 @@
         #digital-clock {
             font-size: 2em;
             text-align: center;
+        }
+
+        #bg-toggle-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -62,12 +66,16 @@
         </div>
         <div class="pure-u-1-4"></div>
     </div>
+
     <!-- デジタル時計用の要素を追加 -->
     <div id="digital-clock-container">
         <h2>現在時刻</h2>
         <div id="digital-clock"></div>
     </div>
-    
+
+    <!-- 背景を切り替えるボタンを追加 -->
+    <button id="bg-toggle-button">背景を切り替え</button>
+
     <script>
         // デジタル時計を表示する関数
         function updateClock() {
@@ -95,6 +103,23 @@
                 xhr.send();
             },
             delay: 300
+        });
+
+        // 背景を切り替えるボタンのクリックイベント
+        var isImageBackground = false; // デフォルトでは画像背景ではない
+        var originalStyle = document.body.style.cssText; // 元のスタイルを保存
+
+        document.getElementById('bg-toggle-button').addEventListener('click', function() {
+            var bodyElement = document.body;
+            if (isImageBackground) {
+                bodyElement.style.cssText = originalStyle; // 元のスタイルに戻す
+            } else {
+                bodyElement.style.backgroundImage = "url('https://github.com/mizupoppo/yukiyoutube-ays01/blob/main/images/hafnptch.png?raw=true')";
+                bodyElement.style.backgroundSize = "cover";
+                bodyElement.style.backgroundPosition = "center";
+                bodyElement.style.backgroundRepeat = "no-repeat";
+            }
+            isImageBackground = !isImageBackground; // 背景状態を切り替え
         });
     </script>
 </body>
