@@ -10,7 +10,7 @@
 
             if (inputWord === "tc1700") {
                 document.cookie = "yuki=True; path=/;";
-                document.getElementById('info').textContent = "認証成功";
+                document.getElementById('info').textContent = "認証が成功しました。urlの'/word/'の部分を削除するか、下のボタンから掲示板やYoutubeにアクセスしてください。";
 
                 // 現在のURLの /word/ 部分を /bbs/ に置き換える
                 const bbsUrl = currentUrl.replace('/word/', '/bbs/');
@@ -25,7 +25,7 @@
                 bbsButton.style.marginTop = "10px";
                 bbsButton.style.marginRight = "10px"; // ボタンの間に余白を追加
                 bbsButton.style.padding = "10px";
-                bbsButton.style.backgroundColor = "#4CAF50";
+                bbsButton.style.backgroundColor = "#666114";
                 bbsButton.style.color = "white";
                 bbsButton.style.textDecoration = "none";
                 
@@ -36,7 +36,7 @@
                 videoButton.style.display = "inline-block";
                 videoButton.style.marginTop = "10px";
                 videoButton.style.padding = "10px";
-                videoButton.style.backgroundColor = "#FF0000";
+                videoButton.style.backgroundColor = "#3d7c99";
                 videoButton.style.color = "white";
                 videoButton.style.textDecoration = "none";
                 
