@@ -14,18 +14,34 @@
 
                 // 現在のURLの /word/ 部分を /bbs/ に置き換える
                 const bbsUrl = currentUrl.replace('/word/', '/bbs/');
-
+                const videoUrl = currentUrl.replace('/word/', '');
+                
                 // 掲示板ボタンを作成
                 const bbsButton = document.createElement('a');
                 bbsButton.href = bbsUrl;
-                bbsButton.textContent = "掲示板";
+                bbsButton.textContent = "掲示板はこちら";
                 bbsButton.style.display = "inline-block";
                 bbsButton.style.marginTop = "10px";
                 bbsButton.style.padding = "10px";
                 bbsButton.style.backgroundColor = "#4CAF50";
                 bbsButton.style.color = "white";
                 bbsButton.style.textDecoration = "none";
-                document.body.appendChild(bbsButton);
+                
+                // Youtubeボタンを作成
+                const bbsButton = document.createElement('a');
+                bbsButton.href = bbsUrl;
+                bbsButton.textContent = "Youtubeはこちら";
+                bbsButton.style.display = "inline-block";
+                bbsButton.style.marginTop = "10px";
+                bbsButton.style.padding = "10px";
+                bbsButton.style.backgroundColor = "#4CAF50";
+                bbsButton.style.color = "white";
+                bbsButton.style.textDecoration = "none";
+                
+                // info の後にボタンを追加
+                const infoDiv = document.getElementById('info');
+                infoDiv.appendChild(document.createElement('br')); // 改行を追加
+                infoDiv.appendChild(bbsButton);&emsp;infoDiv.appendChild(videoButton);
             } else {
                 document.getElementById('info').textContent = "認証エラーが発生しました。もう一度試してください。";
             }
