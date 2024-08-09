@@ -141,9 +141,6 @@ def get_comments(videoid):
 def get_replies(videoid,key):
     t = json.loads(apicommentsrequest(fr"api/v1/comments/{videoid}?hmac_key={key}&hl=jp&format=html"))["contentHtml"]
 
-def 
-
-
 def check_cokie(cookie):
     print(cookie)
     if cookie == "True":
