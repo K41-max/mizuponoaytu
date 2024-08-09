@@ -226,11 +226,6 @@ def channel(channelid:str,response: Response,request: Request,yuki: Union[str] =
 @app.get("/answer", response_class=HTMLResponse)
 def set_cokie(q:str):
     t = get_level(q)
-    if t > 5:
-        return f"level{t}\n推測を推奨する"
-    elif t == 0:
-        return "level12以上\nほぼ推測必須"
-    return f"level{t}\n覚えておきたいレベル"
 
 @app.get("/playlist", response_class=HTMLResponse)
 def playlist(list:str,response: Response,request: Request,page:Union[int,None]=1,yuki: Union[str] = Cookie(None),proxy: Union[str] = Cookie(None)):
@@ -259,12 +254,41 @@ def comments(request: Request,v:str):
 def thumbnail(v:str):
     return Response(content = requests.get(fr"https://img.youtube.com/vi/{v}/0.jpg").content,media_type=r"image/jpeg")
 
-@app.get("/bbs",response_class=HTMLResponse)
-def view_bbs(request: Request,name: Union[str, None] = "",seed:Union[str,None]="",channel:Union[str,None]="main",verify:Union[str,None]="false",yuki: Union[str] = Cookie(None)):
-    if not(check_cokie(yuki)):
-        return redirect("/")
-    res = HTMLResponse(requests.get(fr"{url}bbs?name={urllib.parse.quote(name)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}",cookies={"yuki":"True"}).text)
-    return res
+@app.get("/bbs", response_class=HTMLResponse)
+def view_bbs(request: Request, name: Union[str, None] = "", seed: Union[str, None] = "", channel: Union[str, None] = "main", verify: Union[str, None] = "false", yuki: Union[str] = Cookie(None)):
+    res = HTMLResponse(requests.get(fr"{url}bbs?name={urllib.parse.quote(name)}&seed={urllib.parse.quote(seed)}&channel={urllib.parse.quote(channel)}&verify={urllib.parse.quote(verify)}", cookies={"yuki": "True"}).text)
+    
+    clock_html = """
+    <div id="clock"></div>
+    <style>
+        #clock {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+    <script>
+        function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();  // 初期表示のために一度呼び出す
+    </script>
+    """
+    
+    # 取得したデータに時計のHTMLを追加
+    return HTMLResponse(res.body.decode() + clock_html)
 
 @cache(seconds=5)
 def bbsapi_cached(verify,channel):
