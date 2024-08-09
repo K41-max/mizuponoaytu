@@ -265,10 +265,10 @@ def view_bbs(request: Request, name: Union[str, None] = "", seed: Union[str, Non
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(80, 100, 120, 0.8);
             padding: 10px;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 18px;
             font-family: Arial, sans-serif;
         }
     </style>
