@@ -7,11 +7,9 @@
         function getlevel() {
             if (document.getElementById('word').value == "tc1700") {
                 document.cookie = "yuki=True; path=/;";
+                document.getElementById('info').textContent = "認証成功";
             } else {
-                        document.getElementById('info').textContent = "認証エラーが発生しました。もう一度試してください。";
-                });
-                req.open("GET", "/answer?q=" + document.getElementById('word').value);
-                req.send();
+                document.getElementById('info').textContent = "認証エラーが発生しました。もう一度試してください。";
             }
         }
     </script>
