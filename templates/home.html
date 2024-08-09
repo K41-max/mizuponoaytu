@@ -13,17 +13,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <style>
-        #digital-clock {
-            display: inline-block;
+        #digital-clock-container {
+            position: absolute;
+            top: 10px;
+            left: 10px;
             padding: 10px;
             background-color: #333;
             color: #fff;
             font-family: 'Courier New', Courier, monospace;
-            font-size: 2em;
             border-radius: 5px;
             border: 2px solid #555;
+        }
+
+        #digital-clock-container h2 {
+            margin: 0;
+            font-size: 1.2em;
             text-align: center;
-            margin-top: 20px;
+        }
+
+        #digital-clock {
+            font-size: 2em;
+            text-align: center;
         }
     </style>
 </head>
@@ -45,7 +55,10 @@
         <div class="pure-u-1-4"></div>
     </div>
     <!-- デジタル時計用の要素を追加 -->
-    <div id="digital-clock"></div>
+    <div id="digital-clock-container">
+        <h2>現在時刻</h2>
+        <div id="digital-clock"></div>
+    </div>
     
     <script>
         // デジタル時計を表示する関数
