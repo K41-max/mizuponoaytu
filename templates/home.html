@@ -12,36 +12,45 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style>
+        #digital-clock {
+            display: inline-block;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 2em;
+            border-radius: 5px;
+            border: 2px solid #555;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
-    <body class="no-theme">
-        <div class="pure-g h-box" id="search-widget">
-            <div class="pure-u-1" id="logo">
-                <h1 href="/" class="pure-menu-heading">Yuki Youtube</h1>
+<body class="no-theme">
+    <div class="pure-g h-box" id="search-widget">
+        <div class="pure-u-1" id="logo">
+            <h1 href="/" class="pure-menu-heading">Yuki Youtube</h1>
             <a href="/bbs">掲示板</a>
-            </div>
-            <div class="pure-u-1-4"></div>
-            <div class="pure-u-1 pure-u-md-12-24 searchbar">
-                <form class="pure-form" action="/search" method="get">
-                    <fieldset>
-                        <input type="search" id="searchbox" autocomplete="on" autocorrect="on" autocapitalize="none" spellcheck="false" autofocus="" name="q" placeholder="検索" title="検索" value="">
-                    </fieldset>
-                </form>
-            </div>
-            <div class="pure-u-1-4"></div>
-            
         </div>
-        <script>$('#searchbox').autocomplete({
-            source: function (request, response) {
-                {
-            var url = "/suggest?keyword="+ request.term
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", url);
-            xhr.onload = function() {
-                response(JSON.parse(xhr.responseText));
-            }
-            xhr.send();
-        }},delay:300});</script>
-    </body>
-
-</html>
+        <div class="pure-u-1-4"></div>
+        <div class="pure-u-1 pure-u-md-12-24 searchbar">
+            <form class="pure-form" action="/search" method="get">
+                <fieldset>
+                    <input type="search" id="searchbox" autocomplete="on" autocorrect="on" autocapitalize="none" spellcheck="false" autofocus="" name="q" placeholder="検索" title="検索" value="">
+                </fieldset>
+            </form>
+        </div>
+        <div class="pure-u-1-4"></div>
+    </div>
+    <!-- デジタル時計用の要素を追加 -->
+    <div id="digital-clock"></div>
+    
+    <script>
+        // デジタル時計を表示する関数
+        function updateClock() {
+            var now = new Date();
+            var hours = String(now.getHours()).padStart(2, '0');
+            var minutes = String(now.getMinutes()).padStart(2, '0');
+            var seconds = String(now.getSeco
