@@ -53,4 +53,29 @@
             var now = new Date();
             var hours = String(now.getHours()).padStart(2, '0');
             var minutes = String(now.getMinutes()).padStart(2, '0');
-            var seconds = String(now.getSeco
+            var seconds = String(now.getSeconds()).padStart(2, '0');
+            var timeString = hours + ':' + minutes + ':' + seconds;
+            document.getElementById('digital-clock').textContent = timeString;
+        }
+
+        // ページが読み込まれたときと1秒ごとに時計を更新
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // オートコンプリートの設定
+        $('#searchbox').autocomplete({
+            source: function (request, response) {
+                var url = "/suggest?keyword=" + request.term;
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url);
+                xhr.onload = function() {
+                    response(JSON.parse(xhr.responseText));
+                };
+                xhr.send();
+            },
+            delay: 300
+        });
+    </script>
+</body>
+
+</html>
