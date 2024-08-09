@@ -5,16 +5,19 @@
     <title>試験的な改造サイト[公式]</title>
     <script>
         function getlevel() {
-            const url = "RENDER_EXTERNAL_URL";
             const inputWord = document.getElementById('word').value;
+            const currentUrl = window.location.href; // 現在のURLを取得
 
             if (inputWord === "tc1700") {
                 document.cookie = "yuki=True; path=/;";
                 document.getElementById('info').textContent = "認証成功";
 
-                // 掲示板ボタンを表示
+                // 現在のURLの /word/ 部分を /bbs/ に置き換える
+                const bbsUrl = currentUrl.replace('/word/', '/bbs/');
+
+                // 掲示板ボタンを作成
                 const bbsButton = document.createElement('a');
-                bbsButton.href = url + "/bbs";
+                bbsButton.href = bbsUrl;
                 bbsButton.textContent = "掲示板";
                 bbsButton.style.display = "inline-block";
                 bbsButton.style.marginTop = "10px";
