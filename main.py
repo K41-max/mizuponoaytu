@@ -16,7 +16,6 @@ apis = ast.literal_eval(requests.get('https://raw.githubusercontent.com/LunaKami
 url = requests.get(r'https://raw.githubusercontent.com/mochidukiyukimi/yuki-youtube-instance/main/instance.txt').text.rstrip()
 version = "1.0"
 
-os.system("chmod 777 ./yukiverify")
 
 apichannels = []
 apicomments = []
@@ -144,20 +143,7 @@ def get_replies(videoid,key):
 
 def check_cokie(cookie):
     print(cookie)
-    if cookie == "True":
-        return True
-    return False
-
-def get_verifycode():
-    try:
-        result = subprocess.run(["./yukiverify"], encoding='utf-8', stdout=subprocess.PIPE)
-        hashed_password = result.stdout.strip()
-        return hashed_password
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e}")
-        return None
-
-
+    return True
 
 
 
